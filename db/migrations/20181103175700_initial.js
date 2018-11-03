@@ -108,8 +108,8 @@ exports.up = function(knex, Promise) {
         table.bigIncrements('userlogin_id').primary();
         table.string('email', 50).notNullable();
         table.string('password', 200).notNullable();
-        table.timestamp('created_at').defaultTo(knex.fn.now());
-        table.timestamp('updated_at').defaultTo(knex.fn.now());
+        // table.timestamp('created_at').defaultTo(knex.fn.now());
+        // table.timestamp('updated_at').defaultTo(knex.fn.now());
     });
 };
 
