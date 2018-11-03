@@ -29,6 +29,13 @@ exports.up = function (knex, Promise) {
 			table.foreign('transaction_id').references('transaction_id').inTable('transaction');
 		})
 	})
+	.then(() => {
+		return knex.schema.alterTable('establishment_phonenumber', function (table) {
+			table.primary('establishment_id');
+
+			table.foreign('establishment_id').references('establishment_id').inTable('establishment');
+		})
+	})
 };
 
 exports.down = function (knex, Promise) {
@@ -63,8 +70,7 @@ exports.down = function (knex, Promise) {
 			return table.dropForeign('transaction_id')
 		})
 	})
-	
-	// ;
+
 	
 	.then(() => {
 		return knex.schema.table('establishment_transactions', function (table) {
@@ -74,6 +80,13 @@ exports.down = function (knex, Promise) {
 	.then(() => {
 		return knex.schema.table('establishment_transactions', function (table) {
 			return table.dropForeign('transaction_id')
+		})
+	})
+	
+	// ;
+	.then(() => {
+		return knex.schema.table('establishment_phonenumber', function (table) {
+			return table.dropForeign('establishment_id')
 		})
 	})
 };
