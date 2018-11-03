@@ -36,6 +36,14 @@ exports.up = function (knex, Promise) {
 			table.foreign('establishment_id').references('establishment_id').inTable('establishment');
 		})
 	})
+	.then(() => {
+		return knex.schema.alterTable('transaction_notification', function (table) {
+			table.primary(['transaction_id', 'notification_id']);
+
+			table.foreign('transaction_id').references('transaction_id').inTable('transaction');
+			table.foreign('notification_id').references('notification_id').inTable('notification');
+		})
+	})
 };
 
 exports.down = function (knex, Promise) {
@@ -83,10 +91,23 @@ exports.down = function (knex, Promise) {
 		})
 	})
 	
-	// ;
+	
 	.then(() => {
 		return knex.schema.table('establishment_phonenumber', function (table) {
 			return table.dropForeign('establishment_id')
+		})
+	})
+
+	// ;
+
+	.then(() => {
+		return knex.schema.table('transaction_notification', function (table) {
+			return table.dropForeign('notification_id')
+		})
+	})
+	.then(() => {
+		return knex.schema.table('transaction_notification', function (table) {
+			return table.dropForeign('transaction_id')
 		})
 	})
 };
