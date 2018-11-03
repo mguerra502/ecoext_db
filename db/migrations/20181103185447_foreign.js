@@ -13,11 +13,27 @@ exports.up = function (knex, Promise) {
 			table.foreign('notification_id').references('notification_id').inTable('notification');
 		})
 	})
+	.then(() => {
+		return knex.schema.alterTable('account_transactions', function (table) {
+			table.primary(['account_id', 'transaction_id']);
+
+			table.foreign('account_id').references('account_id').inTable('account');
+			table.foreign('transaction_id').references('transaction_id').inTable('transaction');
+		})
+	})
+	.then(() => {
+		return knex.schema.alterTable('establishment_transactions', function (table) {
+			table.primary(['establishment_id', 'transaction_id']);
+
+			table.foreign('establishment_id').references('establishment_id').inTable('establishment');
+			table.foreign('transaction_id').references('transaction_id').inTable('transaction');
+		})
+	})
 };
 
 exports.down = function (knex, Promise) {
 	// return knex.schema.table('account_purses', function (table) {})
-
+	
 	return knex.schema.table('account_purses', function (table) {
 		return table.dropForeign('account_id')
 	})
@@ -34,6 +50,30 @@ exports.down = function (knex, Promise) {
 	.then(() => {
 		return knex.schema.table('account_notification', function (table) {
 			return table.dropForeign('notification_id')
+		})
+	})
+	
+	.then(() => {
+		return knex.schema.table('account_transactions', function (table) {
+			return table.dropForeign('account_id')
+		})
+	})
+	.then(() => {
+		return knex.schema.table('account_transactions', function (table) {
+			return table.dropForeign('transaction_id')
+		})
+	})
+	
+	// ;
+	
+	.then(() => {
+		return knex.schema.table('establishment_transactions', function (table) {
+			return table.dropForeign('establishment_id')
+		})
+	})
+	.then(() => {
+		return knex.schema.table('establishment_transactions', function (table) {
+			return table.dropForeign('transaction_id')
 		})
 	})
 };
