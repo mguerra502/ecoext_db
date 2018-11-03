@@ -3,6 +3,9 @@
 # Created by https://www.gitignore.io/api/visualstudiocode,windows,database,node
 # Edit at https://www.gitignore.io/?templates=visualstudiocode,windows,database,node
 
+# 
+*.bkp
+
 ### Database ###
 *.accdb
 *.db

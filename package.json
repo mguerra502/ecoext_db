@@ -12,5 +12,6 @@
         "body-parser": "^1.18.3",
         "knex": "^0.15.2",
         "mysql2": "^1.6.1"
-    }
+    },
+    "devDependencies": {}
 }
