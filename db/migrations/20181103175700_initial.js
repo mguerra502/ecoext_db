@@ -8,16 +8,19 @@ exports.up = function(knex, Promise) {
         table.text('lastName', 20).notNullable();
         table.text('gender', 20).notNullable();
         table.dateTime('dob').notNullable();
+        table.timestamps(false, true);
     })
     // ACCOUNT_PURSES
     .createTable('account_purses', function (table) {
         table.bigInteger('account_id').unsigned().notNullable();
         table.bigInteger('purse_id').unsigned().notNullable();
+        table.timestamps(false, true);
     })
     // ACCOUNT_TRANSACTIONS
     .createTable('account_transactions', function (table) {
         table.bigInteger('account_id').unsigned().notNullable();
         table.bigInteger('transaction_id').unsigned().notNullable();
+        table.timestamps(false, true);
     })
     // ESTABLISHMENT
     .createTable('establishment', function (table) {
@@ -30,27 +33,32 @@ exports.up = function(knex, Promise) {
         table.text('lon', 9);
         /*************** END ************/
         /**** establishment_adresses ****/
+        table.timestamps(false, true);
     })
     // ESTABLISHMENT_TRANSACTIONS
     .createTable('establishment_transactions', function (table) {
         table.bigInteger('establishment_id').unsigned().notNullable();
         table.bigInteger('transaction_id').unsigned().notNullable();
+        table.timestamps(false, true);
     })
     // ESTABLISHMENT_PHONENUMBER
     .createTable('establishment_phonenumber', function (table) {
         table.bigInteger('establishment_id').unsigned().notNullable();
         table.text('number').notNullable();
+        table.timestamps(false, true);
     })
     // ESTABLISHMENT_LOGIN
     .createTable('establishment_login', function (table) {
         table.bigInteger('establishment_id').unsigned().notNullable();
         table.text('username', 50).notNullable();
         table.text('password', 200).notNullable();
+        table.timestamps(false, true);
     })
     // TRANSACTION_NOTIFICATION
     .createTable('transaction_notification', function (table) {
         table.bigInteger('notification_id').unsigned().notNullable();
         table.bigInteger('transaction_id').unsigned().notNullable();
+        table.timestamps(false, true);
     })
     // NOTIFICATION
     .createTable('notification', function (table) {
@@ -59,22 +67,26 @@ exports.up = function(knex, Promise) {
         //TODO: notification_type
         table.text('type').notNullable();
         table.text('description').notNullable();
+        table.timestamps(false, true);
     })
     // PURSE
     .createTable('purse', function (table) {
         table.bigIncrements('purse_id').primary();
         table.text('name').notNullable();
         table.text('description').notNullable();
+        table.timestamps(false, true);
     })
     // PURSE_TRANSACTIONS
     .createTable('purse_transactions', function (table) {
         table.bigInteger('purse_id').unsigned().notNullable();
         table.bigInteger('transaction_id').unsigned().notNullable();
+        table.timestamps(false, true);
     })
     // ACCOUNT_NOTIFICATION
     .createTable('account_notification', function (table) {
         table.bigInteger('account_id').unsigned().notNullable();
         table.bigInteger('notification_id').unsigned().notNullable();
+        table.timestamps(false, true);
     })
     // TRANSACTION
     .createTable('transaction', function (table) {
@@ -86,6 +98,7 @@ exports.up = function(knex, Promise) {
         /**** transaction_labels ****/
         table.dateTime('date');
         table.text('description');
+        table.timestamps(false, true);
     })
     // TRANSACTION_ITEMS
     .createTable('transaction_items', function (table) {
@@ -96,12 +109,14 @@ exports.up = function(knex, Promise) {
         table.double('price').unsigned().notNullable();
         table.integer('quantity').unsigned().notNullable();
         table.double('tax').unsigned().notNullable();
+        table.timestamps(false, true);
     })
     // TRANSACTION_PAYMENT
     .createTable('transaction_payment', function (table) {
         table.bigInteger('transaction_id').unsigned().notNullable();
         table.text('type');
         table.double('paid');
+        table.timestamps(false, true);
     })
     // USER_LOGIN
     .createTable('user_login', function (table) {
@@ -110,6 +125,7 @@ exports.up = function(knex, Promise) {
         table.string('password', 200).notNullable();
         // table.timestamp('created_at').defaultTo(knex.fn.now());
         // table.timestamp('updated_at').defaultTo(knex.fn.now());
+        table.timestamps(false, true);
     });
 };
 
