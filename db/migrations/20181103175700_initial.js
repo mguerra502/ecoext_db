@@ -72,8 +72,8 @@ exports.up = function(knex, Promise) {
     // PURSE
     .createTable('purse', function (table) {
         table.bigIncrements('purse_id').primary();
-        table.text('name').notNullable();
-        table.text('description').notNullable();
+        table.text('name');
+        table.text('description');
         table.timestamps(false, true);
     })
     // PURSE_TRANSACTIONS
@@ -120,9 +120,10 @@ exports.up = function(knex, Promise) {
     })
     // USER_LOGIN
     .createTable('user_login', function (table) {
-        table.bigIncrements('userlogin_id').primary();
-        table.string('email', 50).notNullable();
-        table.string('password', 200).notNullable();
+        // table.bigIncrements('userlogin_id').primary();
+        table.bigInteger('account_id').unsigned().notNullable();
+        table.string('email', 50);
+        table.string('password', 200);
         // table.timestamp('created_at').defaultTo(knex.fn.now());
         // table.timestamp('updated_at').defaultTo(knex.fn.now());
         table.timestamps(false, true);
