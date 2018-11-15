@@ -33,30 +33,30 @@ const createPurse = (knex, purse) => {
   let pursesQuery = knex("purse").where("name", purse.name)
     .whereNotIn("purse_id", knex.select('purse_id').from('account_purses'))
     .first();
-  // console.log(pursesQuery.toString());
   return pursesQuery
   .then(
     (purseObject) => {
       let accountQuery = knex("account")
       .select('account_id')
-      // .first()
+      .whereNotIn("account_id", knex.select('account_id').from('account_purses').where('purse_id', purseObject.purse_id))
+      .first()
 
-      accountQuery.forEach(account) => {
-        console.log(account)
-        // console.log(accountQuery.toString())
-        // let insertQuery = knex("account_purses").insert({
-        //   account_id: accountQuery,
-        //   purse_id: purseObject.purse_id
-        // });
-        // return insertQuery;
+      accountQuery.then((accountObject) =>{
+        console.log(purseObject.purse_id);
+        console.log(accountObject);
+        
+        let insertQuery = knex("account_purses").insert({
+          account_id: accountObject.account_id,
+          purse_id: purseObject.purse_id
+        });
+        return insertQuery;
       })
-
       
-      // return query, purseObject);
+      
     }
   ).then((accountObject) => {
     // console.log(purseObject);
-    console.log(accountObject)
+    // console.log(accountObject)
     // console.log("\t"+accountObject.account_id)
   });
 
