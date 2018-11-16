@@ -2,61 +2,61 @@ exports.up = function (knex, Promise) {
 	return knex.schema.alterTable('account_purses', function (table) {
 		table.primary(['account_id', 'purse_id']);
 
-		table.foreign('account_id').references('account_id').inTable('account');
-		table.foreign('purse_id').references('purse_id').inTable('purse');
+		table.foreign('account_id').references('account_id').inTable('account').onDelete("CASCADE").onUpdate("CASCADE");
+		table.foreign('purse_id').references('purse_id').inTable('purse').onDelete("CASCADE").onUpdate("CASCADE");
 	})
 	.then(() => {
 		return knex.schema.alterTable('account_notification', function (table) {
 			table.primary(['account_id', 'notification_id']);
 
-			table.foreign('account_id').references('account_id').inTable('account');
-			table.foreign('notification_id').references('notification_id').inTable('notification');
+			table.foreign('account_id').references('account_id').inTable('account').onDelete("CASCADE").onUpdate("CASCADE");
+			table.foreign('notification_id').references('notification_id').inTable('notification').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})
 	.then(() => {
 		return knex.schema.alterTable('account_transactions', function (table) {
 			table.primary(['account_id', 'transaction_id']);
 
-			table.foreign('account_id').references('account_id').inTable('account');
-			table.foreign('transaction_id').references('transaction_id').inTable('transaction');
+			table.foreign('account_id').references('account_id').inTable('account').onDelete("CASCADE").onUpdate("CASCADE");
+			table.foreign('transaction_id').references('transaction_id').inTable('transaction').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})
 	.then(() => {
 		return knex.schema.alterTable('establishment_transactions', function (table) {
 			table.primary(['establishment_id', 'transaction_id']);
 
-			table.foreign('establishment_id').references('establishment_id').inTable('establishment');
-			table.foreign('transaction_id').references('transaction_id').inTable('transaction');
+			table.foreign('establishment_id').references('establishment_id').inTable('establishment').onDelete("CASCADE").onUpdate("CASCADE");
+			table.foreign('transaction_id').references('transaction_id').inTable('transaction').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})
 	.then(() => {
 		return knex.schema.alterTable('establishment_phonenumber', function (table) {
 			table.primary('establishment_id');
 
-			table.foreign('establishment_id').references('establishment_id').inTable('establishment');
+			table.foreign('establishment_id').references('establishment_id').inTable('establishment').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})
 	.then(() => {
 		return knex.schema.alterTable('transaction_notification', function (table) {
 			table.primary(['transaction_id', 'notification_id']);
 
-			table.foreign('transaction_id').references('transaction_id').inTable('transaction');
-			table.foreign('notification_id').references('notification_id').inTable('notification');
+			table.foreign('transaction_id').references('transaction_id').inTable('transaction').onDelete("CASCADE").onUpdate("CASCADE");
+			table.foreign('notification_id').references('notification_id').inTable('notification').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})
 	.then(() => {
 		return knex.schema.alterTable('purse_transactions', function (table) {
 			table.primary(['purse_id', 'transaction_id']);
 
-			table.foreign('purse_id').references('purse_id').inTable('purse');
-			table.foreign('transaction_id').references('transaction_id').inTable('transaction');
+			table.foreign('purse_id').references('purse_id').inTable('purse').onDelete("CASCADE").onUpdate("CASCADE");
+			table.foreign('transaction_id').references('transaction_id').inTable('transaction').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})
 	.then(() => {
 		return knex.schema.alterTable('transaction_items', function (table) {
 			table.primary('transaction_id');
 
-			table.foreign('transaction_id').references('transaction_id').inTable('transaction');
+			table.foreign('transaction_id').references('transaction_id').inTable('transaction').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})
 
@@ -64,7 +64,7 @@ exports.up = function (knex, Promise) {
 		return knex.schema.alterTable('transaction_payment', function (table) {
 			table.primary('transaction_id');
 
-			table.foreign('transaction_id').references('transaction_id').inTable('transaction');
+			table.foreign('transaction_id').references('transaction_id').inTable('transaction').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})
 
@@ -72,7 +72,7 @@ exports.up = function (knex, Promise) {
 		return knex.schema.alterTable('user_login', function (table) {
 			table.primary('account_id');
 
-			table.foreign('account_id').references('account_id').inTable('account');
+			table.foreign('account_id').references('account_id').inTable('account').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})
 	
