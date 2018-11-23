@@ -96,6 +96,7 @@ exports.up = function(knex, Promise) {
         table.text('label');
         /****        END         ****/
         /**** transaction_labels ****/
+        // TODO: revove table.dateTime('date');
         table.dateTime('date');
         table.text('description');
         table.timestamps(false, true);
