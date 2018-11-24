@@ -11,7 +11,7 @@ exports.seed = function(knex, Promise) {
     let accountPurses_Promise = [];
 
     pursesData.forEach((purse) => {
-      accountPurses_Promise.push(accountPurses(knex, purse));
+      accountPurses_Promise.push(createPurse(knex, purse));
     });
     return Promise.all(accountPurses_Promise);
   })

@@ -4,7 +4,7 @@ module.exports = {
         connection: {
             host: '127.0.0.1',
             port: process.env.ECOEXT_MARIADB_PORT,
-            user: 'root',
+            user: process.env.ECOEXT_MARIADB_USER,
             password: process.env.ECOEXT_MARIADB_ROOTPASSWORD,
             database: 'ecoext'
         },
@@ -19,9 +19,9 @@ module.exports = {
         client: 'mysql2',
         connection: {
             host: '127.0.0.1',
-            port: 3307,
+            port: 3306,
             user: 'gabriel',
-            password: 'eueeu99',
+            password: 'Quemsabecala16!',
             database: 'ecoext'
         },
         migrations: {
