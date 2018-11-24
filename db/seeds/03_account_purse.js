@@ -17,7 +17,7 @@ exports.seed = function(knex, Promise) {
   })
 };
 
-const accountPurses = (knex, purse) => {
+const createPurse = (knex, purse) => {
   
   let selectAccount = knex("account")
   .select(knex.raw('count(account.account_id) as count, account.account_id'))
@@ -37,6 +37,7 @@ const accountPurses = (knex, purse) => {
         account_id: accountObject.account_id,
         purse_id: purseObject.purse_id
       });
-    });
-  })
+    })
+  });
+  // TODO: one purse to one account
 };
