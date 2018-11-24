@@ -1,6 +1,6 @@
 module.exports = {
     after_insert_on_account:`
-        CREATE TRIGGER ACCOUNT_AFTER_INSERT
+        CREATE TRIGGER account_AFTER_INSERT
         AFTER INSERT
             ON account
         FOR EACH ROW
