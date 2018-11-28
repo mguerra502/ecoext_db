@@ -4,7 +4,7 @@ module.exports = {
         connection: {
             host: '127.0.0.1',
             port: process.env.ECOEXT_MARIADB_PORT,
-            user: process.env.ECOEXT_MARIADB_USER,
+            user: 'root',
             password: process.env.ECOEXT_MARIADB_ROOTPASSWORD,
             database: 'ecoext'
         },
