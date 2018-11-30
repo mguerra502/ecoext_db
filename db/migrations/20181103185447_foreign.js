@@ -1,12 +1,13 @@
 exports.up = function (knex, Promise) {
 	return knex.schema.alterTable('account_purses', function (table) {
 		table.primary(['account_id', 'purse_id']);
+		// table.index(columns, [indexName], [indexType])
 
 		table.foreign('account_id').references('account_id').inTable('account').onDelete("CASCADE").onUpdate("CASCADE");
 		table.foreign('purse_id').references('purse_id').inTable('purse').onDelete("CASCADE").onUpdate("CASCADE");
 	})
 	.then(() => {
-		return knex.schema.alterTable('account_notification', function (table) {
+		return knex.schema.alterTable('account_notifications', function (table) {
 			table.primary(['account_id', 'notification_id']);
 
 			table.foreign('account_id').references('account_id').inTable('account').onDelete("CASCADE").onUpdate("CASCADE");
@@ -90,12 +91,12 @@ exports.down = function (knex, Promise) {
 		})
 	})
 	.then(() => {
-		return knex.schema.table('account_notification', function (table) {
+		return knex.schema.table('account_notifications', function (table) {
 			return table.dropForeign('account_id')
 		})
 	})
 	.then(() => {
-		return knex.schema.table('account_notification', function (table) {
+		return knex.schema.table('account_notifications', function (table) {
 			return table.dropForeign('notification_id')
 		})
 	})

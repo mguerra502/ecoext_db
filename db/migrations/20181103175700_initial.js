@@ -82,8 +82,8 @@ exports.up = function(knex, Promise) {
         table.bigInteger('transaction_id').unsigned().notNullable();
         table.timestamps(false, true);
     })
-    // ACCOUNT_NOTIFICATION
-    .createTable('account_notification', function (table) {
+    // ACCOUNT_NOTIFICATIONS
+    .createTable('account_notifications', function (table) {
         table.bigInteger('account_id').unsigned().notNullable();
         table.bigInteger('notification_id').unsigned().notNullable();
         table.timestamps(false, true);
@@ -167,7 +167,7 @@ exports.down = function(knex, Promise) {
         return knex.schema.dropTable('purse_transactions')
     })
     .then(() => {
-        return knex.schema.dropTable('account_notification')
+        return knex.schema.dropTable('account_notifications')
     })
     .then(() => {
         return knex.schema.dropTable('transaction')
