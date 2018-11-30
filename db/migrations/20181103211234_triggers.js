@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
   .then(()=>{
     return knex.raw(after_insert_on_establishment);
   })
+  // TODO: trigger to avoi
 };
 
 exports.down = function(knex, Promise) {
