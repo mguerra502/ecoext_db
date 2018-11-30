@@ -1,43 +1,61 @@
-const accountsData = require("../../data/account");
-const pursesData = require("../../data/purse");
-
-exports.seed = function(knex, Promise) {
+const faker = require('faker');
+exports.seed = function (knex, Promise) {
   
-  return knex("account").insert(accountsData)
-  .then(() =>{
-    return knex("purse").insert(pursesData)
+  let accounts_id = [];
+  let purses_id = [];
+  
+  
+  return knex("account").del()
+  .then(() => {
+    return knex("purse").del();
   })
-  .then(()=>{
-    let accountPurses_Promise = [];
-
-    pursesData.forEach((purse) => {
-      accountPurses_Promise.push(createPurse(knex, purse));
-    });
-    return Promise.all(accountPurses_Promise);
-  })
-};
-
-const createPurse = (knex, purse) => {
-  
-  let selectAccount = knex("account")
-  .select(knex.raw('count(account.account_id) as count, account.account_id'))
-  .having('count', '<=', 1)
-  .leftOuterJoin('account_purses', 'account.account_id', 'account_purses.account_id')
-  .groupBy('account.account_id')
-  .first()
-  
-  return selectAccount
-  .then((accountObject) =>{
-    return knex("purse")
-    .where("name", purse.name)
-    .whereNotIn("purse_id", knex.select('purse_id').from('account_purses'))
-    .first()
-    .then((purseObject) => {
-      return knex("account_purses").insert({
-        account_id: accountObject.account_id,
-        purse_id: purseObject.purse_id
+  .then(() => {
+    
+    let accounts = [];
+    
+    for (let index = 0; index < 10; index++) {
+      accounts.push({
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        gender: "m",
+        dob: faker.date.recent(),
       });
+    }
+    
+    return knex("account").insert(accounts);
+  })
+  .then(() => {
+    return knex('account').pluck('account_id').then((aids) => {
+      accounts_id = aids;
     })
+  })
+  .then(() => {
+    let purses = [];
+    
+    for (let index = 0; index < 10; index++) {
+      purses.push({
+        name: faker.name.firstName(),
+        description: faker.name.lastName(),
+      });
+    }
+    
+    return knex("purse").insert(purses);
+  })
+  .then(() => {
+    return knex('purse').pluck('purse_id').then((pids) => {
+      purses_id = pids;
+    })
+  })
+  .then(() => {
+    const account_purses = [];
+    
+    for (let index = 0; index < 10; index++) {
+      account_purses.push({
+        account_id: faker.random.arrayElement(accounts_id),
+        purse_id: faker.random.arrayElement(purses_id)
+      })
+    }
+    
+    return knex("account_purses").insert(account_purses);
   });
-  // TODO: one purse to one account
 };
