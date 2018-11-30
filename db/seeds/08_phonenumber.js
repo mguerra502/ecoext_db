@@ -6,8 +6,5 @@ exports.seed = function (knex, Promise) {
   return knex('phonenumber').del()
   .then(function () {
     return knex("phonenumber").insert(phoneNumberData)
-      .then((result) => {
-        console.log(result)
-      })
   });
 };
