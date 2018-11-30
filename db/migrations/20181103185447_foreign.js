@@ -26,8 +26,9 @@ exports.up = function (knex, Promise) {
 	})
 	.then(() => {
 		return knex.schema.alterTable('establishment_phonenumber', function (table) {
-			table.primary('establishment_id');
+			table.primary(['establishment_id', 'phonenumber_id']);
 			table.foreign('establishment_id').references('establishment_id').inTable('establishment').onDelete("CASCADE").onUpdate("CASCADE");
+			table.foreign('phonenumber_id').references('phonenumber_id').inTable('phonenumber').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})
 	.then(() => {

@@ -44,7 +44,7 @@ exports.up = function(knex, Promise) {
     // ESTABLISHMENT_PHONENUMBER
     .createTable('establishment_phonenumber', function (table) {
         table.bigInteger('establishment_id').unsigned().notNullable();
-        table.text('number').notNullable();
+        table.bigInteger('phonenumber_id').unsigned().notNullable();
         table.timestamps(false, true);
     })
     // ESTABLISHMENT_LOGIN
@@ -112,6 +112,12 @@ exports.up = function(knex, Promise) {
         table.double('tax').unsigned().notNullable();
         table.timestamps(false, true);
     })
+    // PHONENUMBER
+    .createTable('phonenumber', function (table) {
+        table.bigIncrements('phonenumber_id').unsigned().notNullable().primary();
+        table.text('number');
+        table.timestamps(false, true);
+    })
     // TRANSACTION_PAYMENT
     .createTable('transaction_payment', function (table) {
         table.bigInteger('transaction_id').unsigned().notNullable();
@@ -171,6 +177,9 @@ exports.down = function(knex, Promise) {
     })
     .then(() => {
         return knex.schema.dropTable('transaction')
+    })
+    .then(() => {
+        return knex.schema.dropTable('phonenumber')
     })
     .then(() => {
         return knex.schema.dropTable('transaction_items')
