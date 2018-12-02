@@ -10,7 +10,6 @@ exports.seed = function (knex, Promise) {
       .first()
     }).then((establishment) => {
       establishment_id = establishment.establishment_id;
-      console.log(establishment.establishment_id)
       return knex('phonenumber')
         .select('phonenumber_id')
         .first()
