@@ -7,6 +7,8 @@ exports.seed = function (knex, Promise) {
     FROM account a, notification n
   `))
 
+  console.log(insert.toString())
+
   return knex('account_notifications').del()
   .then(() => {
     return insert;

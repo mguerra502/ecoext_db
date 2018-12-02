@@ -1,4 +1,3 @@
-/**/
 exports.seed = function (knex, Promise) {
 
   const insert = knex('account_transactions')

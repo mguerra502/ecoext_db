@@ -15,5 +15,8 @@
         "knex": "^0.15.2",
         "mysql2": "^1.6.1"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "babel-preset-env": "^1.7.0",
+        "babel-register": "^6.26.0"
+    }
 }
