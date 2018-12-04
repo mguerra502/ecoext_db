@@ -52,7 +52,7 @@ exports.up = function (knex, Promise) {
 	})
 	.then(() => {
 		return knex.schema.alterTable('transaction_items', function (table) {
-			table.primary('transaction_id');
+			// table.primary('transaction_id');
 			table.foreign('transaction_id').references('transaction_id').inTable('transaction').onDelete("CASCADE").onUpdate("CASCADE");
 		})
 	})

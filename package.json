@@ -16,9 +16,6 @@
         "mysql2": "^1.6.1"
     },
     "devDependencies": {
-        "babel-preset-env": "^1.7.0",
-        "babel-register": "^6.26.0",
-        "kyles-random-fruit": "^0.1.0",
         "superfood": "^1.0.0"
     }
 }
