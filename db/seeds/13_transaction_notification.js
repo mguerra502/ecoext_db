@@ -7,9 +7,14 @@ async function transactionNotification(transaction_array, notifications_array){
   
   let insert = []
 
+  // console.log("transaction_array.length: " + transaction_array.length)
+  
   for(let i = 0; i < transaction_array.length; i++){
+    
     let random_notification_id = notifications_array[_.random(0, notifications_array.length - 1)];
+    // console.log("random_notification_id: " + random_notification_id + " || i: " + i + " || notifications_array.length: " + notifications_array.length);
     _.pull(notifications_array, random_notification_id)
+
     insert.push({transaction_id: transaction_array[i], notification_id: random_notification_id})
   }
   
@@ -32,10 +37,12 @@ exports.seed = function(knex, Promise) {
   })
   .then(function(nids){
     notifications_ids = nids;
-    return transactionNotification(notifications_ids, transactions_ids)
+    return transactionNotification(transactions_ids, notifications_ids)
   })
   .then(function(result){
+    console.log(result)
     let insert = knex(many_to_many).insert(result);
+    console.log(insert.toString())
     return insert;
   })
 };
