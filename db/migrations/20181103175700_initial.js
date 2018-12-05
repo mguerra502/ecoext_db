@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     return knex.schema
     // ACCOUNT
     .createTable('account', function (table) {
+        table.engine("InnoDB")
         table.bigIncrements('account_id').primary();
         table.text('firstName', 20).notNullable();
         table.text('lastName', 20).notNullable();
@@ -12,18 +13,21 @@ exports.up = function(knex, Promise) {
     })
     // ACCOUNT_PURSES
     .createTable('account_purses', function (table) {
+        table.engine("InnoDB")
         table.bigInteger('account_id').unsigned().notNullable();
         table.bigInteger('purse_id').unsigned().notNullable();
         table.timestamps(false, true);
     })
     // ACCOUNT_TRANSACTIONS
     .createTable('account_transactions', function (table) {
+        table.engine("InnoDB")
         table.bigInteger('account_id').unsigned().notNullable();
         table.bigInteger('transaction_id').unsigned().notNullable();
         table.timestamps(false, true);
     })
     // ESTABLISHMENT
     .createTable('establishment', function (table) {
+        table.engine("InnoDB")
         table.bigIncrements('establishment_id').primary();
         table.text('name', 100);
         // TODO: Another table? establishment_adresses
@@ -37,31 +41,36 @@ exports.up = function(knex, Promise) {
     })
     // ESTABLISHMENT_TRANSACTIONS
     .createTable('establishment_transactions', function (table) {
+        table.engine("InnoDB")
         table.bigInteger('establishment_id').unsigned().notNullable();
         table.bigInteger('transaction_id').unsigned().notNullable();
         table.timestamps(false, true);
     })
     // ESTABLISHMENT_PHONENUMBER
     .createTable('establishment_phonenumber', function (table) {
+        table.engine("InnoDB")
         table.bigInteger('establishment_id').unsigned().notNullable();
         table.bigInteger('phonenumber_id').unsigned().notNullable();
         table.timestamps(false, true);
     })
     // ESTABLISHMENT_LOGIN
     .createTable('establishment_login', function (table) {
+        table.engine("InnoDB")
         table.bigInteger('establishment_id').unsigned().notNullable();
         table.text('username', 50).notNullable();
         table.text('password', 200).notNullable();
         table.timestamps(false, true);
     })
     // TRANSACTION_NOTIFICATION
-    .createTable('transaction_notification', function (table) {
+    .createTable('transaction_notifications', function (table) {
+        table.engine("InnoDB")
         table.bigInteger('notification_id').unsigned().notNullable();
         table.bigInteger('transaction_id').unsigned().notNullable();
         table.timestamps(false, true);
     })
     // NOTIFICATION
     .createTable('notification', function (table) {
+        table.engine("InnoDB")
         table.bigIncrements('notification_id').primary();
         table.text('name').notNullable();
         //TODO: notification_type
@@ -71,6 +80,7 @@ exports.up = function(knex, Promise) {
     })
     // PURSE
     .createTable('purse', function (table) {
+        table.engine("InnoDB")
         table.bigIncrements('purse_id').primary();
         table.text('name');
         table.text('description');
@@ -78,18 +88,21 @@ exports.up = function(knex, Promise) {
     })
     // PURSE_TRANSACTIONS
     .createTable('purse_transactions', function (table) {
+        table.engine("InnoDB")
         table.bigInteger('purse_id').unsigned().notNullable();
         table.bigInteger('transaction_id').unsigned().notNullable();
         table.timestamps(false, true);
     })
     // ACCOUNT_NOTIFICATIONS
     .createTable('account_notifications', function (table) {
+        table.engine("InnoDB")
         table.bigInteger('account_id').unsigned().notNullable();
         table.bigInteger('notification_id').unsigned().notNullable();
         table.timestamps(false, true);
     })
     // TRANSACTION
     .createTable('transaction', function (table) {
+        table.engine("InnoDB")
         table.bigIncrements('transaction_id').primary();
         // TODO: Another table? transaction_labels
         /**** transaction_labels ****/
@@ -103,6 +116,7 @@ exports.up = function(knex, Promise) {
     })
     // TRANSACTION_ITEMS
     .createTable('transaction_items', function (table) {
+        table.engine("InnoDB")
         table.bigInteger('transaction_id').unsigned().notNullable();
         //whats the column product and why is it integer? where does it come from?
         // maybe we need a table product?
@@ -114,12 +128,14 @@ exports.up = function(knex, Promise) {
     })
     // PHONENUMBER
     .createTable('phonenumber', function (table) {
+        table.engine("InnoDB")
         table.bigIncrements('phonenumber_id').unsigned().notNullable().primary();
         table.text('number');
         table.timestamps(false, true);
     })
     // TRANSACTION_PAYMENT
     .createTable('transaction_payment', function (table) {
+        table.engine("InnoDB")
         table.bigInteger('transaction_id').unsigned().notNullable();
         table.text('type');
         table.double('paid');
@@ -127,6 +143,7 @@ exports.up = function(knex, Promise) {
     })
     // USER_LOGIN
     .createTable('user_login', function (table) {
+        table.engine("InnoDB")
         // table.bigIncrements('userlogin_id').primary();
         table.bigInteger('account_id').unsigned().notNullable();
         table.string('email', 50);
@@ -161,7 +178,7 @@ exports.down = function(knex, Promise) {
         return knex.schema.dropTable('establishment_login')
     })
     .then(() => {
-        return knex.schema.dropTable('transaction_notification')
+        return knex.schema.dropTable('transaction_notifications')
     })
     .then(() => {
         return knex.schema.dropTable('notification')
