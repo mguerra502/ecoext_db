@@ -1,10 +1,8 @@
 const phoneNumberData = require("../../data/phonenumbers");
 
-
 exports.seed = function (knex, Promise) {
-  // Deletes ALL existing entries
-  return knex('phonenumber').del()
+  return knex('phone_number').del()
   .then(function () {
-    return knex("phonenumber").insert(phoneNumberData)
+    return knex("phone_number").insert(phoneNumberData)
   });
 };
