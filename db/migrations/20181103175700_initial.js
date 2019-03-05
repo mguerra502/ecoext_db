@@ -62,6 +62,8 @@ exports.up = function(knex, Promise) {
         table.timestamps(false, true);
     })
     // TRANSACTION_NOTIFICATION
+    // TODO make it unique, one notification belongs to one transaction 
+    // one transaction has many notifications
     .createTable('transaction_notifications', function (table) {
         table.engine("InnoDB")
         table.bigInteger('notification_id').unsigned().notNullable();
