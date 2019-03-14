@@ -30,7 +30,7 @@ exports.up = function (knex, Promise) {
 		})
 	})
 	.then(() => {
-		return knex.schema.alterTable('establishment_phone_number', function (table) {
+		return knex.schema.alterTable('establishment_phone_numbers', function (table) {
 			table.primary(['establishment_id', 'phone_number_id']);
 			table.foreign('establishment_id').references('establishment_id').inTable('establishment').onDelete("CASCADE").onUpdate("CASCADE");
 			table.foreign('phone_number_id').references('phone_number_id').inTable('phone_number').onDelete("CASCADE").onUpdate("CASCADE");
@@ -118,7 +118,7 @@ exports.down = function (knex, Promise) {
 		})
 	})
 	.then(() => {
-		return knex.schema.table('establishment_phone_number', function (table) {
+		return knex.schema.table('establishment_phone_numbers', function (table) {
 			return table.dropForeign('establishment_id')
 		})
 	})

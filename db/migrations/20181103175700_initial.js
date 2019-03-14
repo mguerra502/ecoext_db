@@ -46,8 +46,8 @@ exports.up = function(knex, Promise) {
         table.bigInteger('transaction_id').unsigned().notNullable();
         table.timestamps(false, true);
     })
-    // ESTABLISHMENT_PHONE_NUMBER
-    .createTable('establishment_phone_number', function (table) {
+    // ESTABLISHMENT_PHONE_NUMBERs
+    .createTable('establishment_phone_numbers', function (table) {
         table.engine("InnoDB")
         table.bigInteger('establishment_id').unsigned().notNullable();
         table.bigInteger('phone_number_id').unsigned().notNullable();
@@ -174,7 +174,7 @@ exports.down = function(knex, Promise) {
         return knex.schema.dropTable('establishment_transactions')
     })
     .then(() => {
-        return knex.schema.dropTable('establishment_phone_number')
+        return knex.schema.dropTable('establishment_phone_numbers')
     })
     .then(() => {
         return knex.schema.dropTable('establishment_login')

@@ -3,7 +3,7 @@ exports.seed = function (knex, Promise) {
   let establishment_id = -1;
   let phone_number_id = -1;
 
-  return knex('establishment_phone_number').del()
+  return knex('establishment_phone_numbers').del()
     .then(function () {
       return knex("establishment")
       .select("establishment_id")
@@ -16,7 +16,7 @@ exports.seed = function (knex, Promise) {
     }).then(function (phonenumber) {
       phone_number_id = phonenumber.phone_number_id;
     }).then(function (phonenumber) {
-      return knex('establishment_phone_number')
+      return knex('establishment_phone_numbers')
       .insert({
         establishment_id: establishment_id,
         phone_number_id: phone_number_id 
