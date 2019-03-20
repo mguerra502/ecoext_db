@@ -1,7 +1,9 @@
 
 exports.up = function(knex, Promise) {
     return knex.schema.alterTable('user_login', function (table) {
-        table.string('user_id', 32).notNullable().unique()
+        // table.string('user_id', 32).notNullable().unique()
+        // TODO user_id must be notNullable
+        table.string('user_id', 32).unique()
     })
     .then(() => {
         return knex.schema.alterTable('user_login', function(table){
@@ -20,6 +22,7 @@ exports.up = function(knex, Promise) {
     })
     .then(() => {
         return knex.schema.alterTable('user_login', function (table) {
+            // table.primary(['account_id', 'user_id']);
             table.primary(['account_id', 'user_id']);
         });
     });
