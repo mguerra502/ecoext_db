@@ -157,10 +157,7 @@ exports.up = function(knex, Promise) {
     });
 };
 
-exports.down = function(knex, Promise) {
-    // return knex.schema.table('knex_migrations', function(table){
-        
-    // })
+exports.down = function (knex, Promise) {
     return knex.schema.dropTable('account')
     .then(() => {
         return knex.schema.dropTable('account_purses')
