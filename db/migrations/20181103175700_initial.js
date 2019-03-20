@@ -40,6 +40,7 @@ exports.up = function(knex, Promise) {
         table.timestamps(false, true);
     })
     // ESTABLISHMENT_TRANSACTIONS
+    // TODO: Change INDEX transaction_id to UNIQUE on establishment_transaction
     .createTable('establishment_transactions', function (table) {
         table.engine("InnoDB")
         table.bigInteger('establishment_id').unsigned().notNullable();
