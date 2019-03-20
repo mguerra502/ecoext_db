@@ -15,8 +15,8 @@ async function transactionPayment(transaction_array, payment_type_array) {
       paid: paid
     })
   }
-  var value = await Promise
-    .resolve(insert)
+  var value = await Promise.resolve(insert)
+  // return value;
   return insert;
 }
 
@@ -34,10 +34,9 @@ exports.seed = function (knex, Promise) {
     })
     .then(function (nids) {
       payment_type_ids = nids;
-      return transactionPayment(transactions_ids, payment_type_ids)
+      return transactionPayment(transactions_ids, payment_type_ids);
     })
     .then(function (result) {
-      console.log(result);
       let insert = knex(many_to_many).insert(result);
       return insert;
     })

@@ -47,9 +47,5 @@ module.exports = [
   {name: faker.name.lastName(), type: faker.hacker.adjective(), description: faker.lorem.paragraph(1)},
   {name: faker.name.lastName(), type: faker.hacker.adjective(), description: faker.lorem.paragraph(1)},
   {name: faker.name.lastName(), type: faker.hacker.adjective(), description: faker.lorem.paragraph(1)},
-  {name: faker.name.lastName(), type: faker.hacker.adjective(), description: faker.lorem.paragraph(1)},
-  {name: faker.name.lastName(), type: faker.hacker.adjective(), description: faker.lorem.paragraph(1)},
-  {name: faker.name.lastName(), type: faker.hacker.adjective(), description: faker.lorem.paragraph(1)},
-  {name: faker.name.lastName(), type: faker.hacker.adjective(), description: faker.lorem.paragraph(1)},
   {name: faker.name.lastName(), type: faker.hacker.adjective(), description: faker.lorem.paragraph(1)}
 ];

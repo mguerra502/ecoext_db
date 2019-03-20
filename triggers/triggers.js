@@ -5,10 +5,10 @@ module.exports = {
             ON account
         FOR EACH ROW
         BEGIN
-            INSERT INTO user_login
-            SET email = NULL,
-                account_id = NEW.account_id,
-                password = NULL;
+            -- INSERT INTO user_login
+            -- SET email = NULL,
+            --    account_id = NEW.account_id,
+            --    password = NULL;
 
             INSERT INTO purse
                 SET name = 'My first EcoWallet',
