@@ -4,12 +4,16 @@ exports.up = function(knex, Promise) {
     // ACCOUNT
     .createTable('account', function (table) {
         table.engine("InnoDB")
+        // table.bigIncrements('account_id').primary().unique();
         table.bigIncrements('account_id').primary();
         table.text('firstName', 20).notNullable();
         table.text('lastName', 20).notNullable();
-        table.text('gender', 20).notNullable();
+        table.specificType('gender', 'char(1)').notNullable();
         table.dateTime('dob').notNullable();
         table.timestamps(false, true);
+    })
+    .alterTable('account', function (t) {
+        t.unique('account_id')
     })
     // ACCOUNT_PURSES
     .createTable('account_purses', function (table) {
@@ -39,6 +43,9 @@ exports.up = function(knex, Promise) {
         /**** establishment_adresses ****/
         table.timestamps(false, true);
     })
+    .alterTable('establishment', function (t) {
+        t.unique('establishment_id')
+    })
     // ESTABLISHMENT_TRANSACTIONS
     // TODO: Change INDEX transaction_id to UNIQUE on establishment_transaction
     .createTable('establishment_transactions', function (table) {
@@ -51,7 +58,7 @@ exports.up = function(knex, Promise) {
     .createTable('establishment_phone_numbers', function (table) {
         table.engine("InnoDB")
         table.bigInteger('establishment_id').unsigned().notNullable();
-        table.bigInteger('phone_number_id').unsigned().notNullable();
+        table.bigInteger('phone_number_id').unsigned().notNullable().unique();
         table.timestamps(false, true);
     })
     // ESTABLISHMENT_LOGIN
@@ -81,6 +88,9 @@ exports.up = function(knex, Promise) {
         table.text('description').notNullable();
         table.timestamps(false, true);
     })
+    .alterTable('notification', function (t) {
+        t.unique('notification_id')
+    })
     // PURSE
     .createTable('purse', function (table) {
         table.engine("InnoDB")
@@ -88,6 +98,9 @@ exports.up = function(knex, Promise) {
         table.text('name');
         table.text('description');
         table.timestamps(false, true);
+    })
+    .alterTable('purse', function (t) {
+        t.unique('purse_id')
     })
     // PURSE_TRANSACTIONS
     .createTable('purse_transactions', function (table) {
@@ -117,6 +130,9 @@ exports.up = function(knex, Promise) {
         table.text('description');
         table.timestamps(false, true);
     })
+    .alterTable('transaction', function (t) {
+        t.unique('transaction_id')
+    })
     // TRANSACTION_ITEMS
     .createTable('transaction_items', function (table) {
         table.engine("InnoDB")
@@ -135,6 +151,9 @@ exports.up = function(knex, Promise) {
         table.bigIncrements('phone_number_id').unsigned().notNullable().primary();
         table.text('number');
         table.timestamps(false, true);
+    })
+    .alterTable('phone_number', function (t) {
+        t.unique('phone_number_id')
     })
     // TRANSACTION_PAYMENT
     .createTable('transaction_payment', function (table) {
