@@ -32,5 +32,36 @@ module.exports = {
             SELECT uuid;
         END
     `,
-    DropCreateUser: `DROP procedure IF EXISTS CreateUser;`
+    DropCreateUser: `DROP procedure IF EXISTS CreateUser;`,
+    CreatePurse: `
+        CREATE PROCEDURE CreatePurse (
+            IN pursename text,
+            IN purseDescription text,
+            IN account_id int
+        )
+        BEGIN
+            DECLARE id varchar(28);
+            DECLARE purse_id bigint;
+            
+            -- SELECT user_id FROM user_login WHERE user_id = INuid INTO uuid;
+            
+            -- IF LENGTH(INuid) != 28 THEN set uuid = "inform a valid user id";
+            -- ELSE
+                -- IF uuid IS NOT NULL THEN set uuid = "already registered";
+                -- ELSE
+                    INSERT INTO purse(name, description) VALUES (pursename, purseDescription);
+                    
+                    SELECT LAST_INSERT_ID() INTO purse_id;
+                    
+                    INSERT INTO account_purses (account_id, purse_id) VALUES (account_id, purse_id);
+                    
+                    SELECT purse_id FROM ecoext.user_login ORDER BY created_at DESC LIMIT 1 INTO id;
+                
+                -- END IF;
+            -- END IF ;
+        
+            SELECT id;
+        END
+    `,
+    DropCreatePurse: `DROP procedure IF EXISTS CreatePurse;`,
 }
