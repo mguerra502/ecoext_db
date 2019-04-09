@@ -64,4 +64,27 @@ module.exports = {
         END
     `,
     DropCreatePurse: `DROP procedure IF EXISTS CreatePurse;`,
+    CreateNotification: `
+        CREATE PROCEDURE CreateNotification(
+            IN NotificationName text,
+            IN NotificationType text,
+            IN NotificationDescription text,
+            IN account_id int
+        )
+        BEGIN
+            DECLARE id bigint;
+            DECLARE notification_id bigint;
+            
+            INSERT INTO notification(name, type, description) VALUES (NotificationName, NotificationType, NotificationDescription);
+            
+            SELECT LAST_INSERT_ID() INTO notification_id;
+            
+            INSERT INTO account_notifications (account_id, notification_id) VALUES (account_id, notification_id);
+            
+            SELECT notification_id FROM ecoext.notification ORDER BY created_at DESC LIMIT 1 INTO id;
+        
+            SELECT id;
+        END
+    `,
+    DropCreateNotification: `DROP procedure IF EXISTS CreateNotification;`,
 }
