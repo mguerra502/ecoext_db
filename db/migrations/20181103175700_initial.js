@@ -37,6 +37,7 @@ exports.up = function(knex, Promise) {
         // TODO: Another table? establishment_adresses
         /**** establishment_adresses ****/
         table.text('address', 100);
+        table.text('image');
         table.text('lat', 9);
         table.text('lon', 9);
         /*************** END ************/
