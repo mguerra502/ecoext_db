@@ -141,7 +141,7 @@ exports.up = function(knex, Promise) {
         //whats the column product and why is it integer? where does it come from?
         // maybe we need a table product?
         table.string('product').notNullable();
-        table.double('price').unsigned().notNullable();
+        table.double('price').notNullable();
         table.integer('quantity').unsigned().notNullable();
         table.double('tax').unsigned().notNullable();
         table.timestamps(false, true);
