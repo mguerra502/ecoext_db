@@ -34,8 +34,8 @@ module.exports = {
             INSERT INTO establishment_login
                 SET
                 establishment_id = NEW.establishment_id,
-                username = LOWER(REPLACE(NEW.name, ' ', '')),
-                password = SHA(CONCAT('EcoExT_', LOWER(REPLACE(NEW.name, ' ', ''))));
+                username = LOWER(REPLACE(NEW.name, ' ', ''));
+                -- password = SHA(CONCAT('EcoExT_', LOWER(REPLACE(NEW.name, ' ', ''))));
         END;
     `,
     after_insert_on_table: table => `
