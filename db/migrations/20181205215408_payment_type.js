@@ -18,6 +18,18 @@ exports.up = function(knex, Promise) {
           table.foreign('payment_type_id').references('payment_type_id').inTable('payment_type').onDelete("CASCADE").onUpdate("CASCADE");
       })
   })
+  .then(function(rows) {
+        return knex('payment_type').insert([
+            {type: "Money"},
+            {type: "Credit Card"},
+            {type: "Debit Card"},
+            {type: "Cheque"},
+            {type: "Money Transfer"},
+            {type: "Contactless Card"},
+            {type: "Contactless Smart Device"},
+            {type: "Mobile Payments"},
+        ])
+    });
 };
 
 exports.down = function(knex, Promise) {

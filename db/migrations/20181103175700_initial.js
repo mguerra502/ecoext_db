@@ -4,7 +4,6 @@ exports.up = function(knex, Promise) {
     // ACCOUNT
     .createTable('account', function (table) {
         table.engine("InnoDB")
-        // table.bigIncrements('account_id').primary().unique();
         table.bigIncrements('account_id').primary();
         table.text('firstName', 20).notNullable();
         table.text('lastName', 20).notNullable();
@@ -67,7 +66,7 @@ exports.up = function(knex, Promise) {
         table.engine("InnoDB")
         table.bigInteger('establishment_id').unsigned().notNullable();
         table.text('username', 50).notNullable();
-        table.text('password', 200).notNullable();
+        table.text('password', 128);
         table.timestamps(false, true);
     })
     // TRANSACTION_NOTIFICATION
@@ -134,12 +133,11 @@ exports.up = function(knex, Promise) {
     .alterTable('transaction', function (t) {
         t.unique('transaction_id')
     })
+
     // TRANSACTION_ITEMS
     .createTable('transaction_items', function (table) {
         table.engine("InnoDB")
         table.bigInteger('transaction_id').unsigned().notNullable();
-        //whats the column product and why is it integer? where does it come from?
-        // maybe we need a table product?
         table.string('product').notNullable();
         table.double('price').notNullable();
         table.integer('quantity').unsigned().notNullable();
@@ -167,14 +165,11 @@ exports.up = function(knex, Promise) {
     // USER_LOGIN
     .createTable('user_login', function (table) {
         table.engine("InnoDB")
-        // table.bigIncrements('userlogin_id').primary();
         table.bigInteger('account_id').unsigned().notNullable();
         table.string('email', 50);
         table.string('password', 200);
-        // table.timestamp('created_at').defaultTo(knex.fn.now());
-        // table.timestamp('updated_at').defaultTo(knex.fn.now());
         table.timestamps(false, true);
-    });
+    })
 };
 
 exports.down = function (knex, Promise) {
